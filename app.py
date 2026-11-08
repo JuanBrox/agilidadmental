@@ -485,7 +485,16 @@ def page_memory():
         S.mem_phase = "input"
         st.rerun()
     elif ph == "input":
-        st.markdown(f"#### Tu respuesta: {' '.join(S.mem_in) or '…'}")
+        st.markdown(
+            "<style>div.stButton>button{min-height:5.2rem;}"
+            "div.stButton>button p{font-size:3.4rem !important;line-height:1.15 !important;}</style>",
+            unsafe_allow_html=True,
+        )
+        st.markdown(
+            f"<div class='big' style='font-size:3rem;min-height:4rem'>{' '.join(S.mem_in) or '…'}</div>",
+            unsafe_allow_html=True,
+        )
+        st.caption("Tu respuesta")
         cols = st.columns(3)
         for j, e in enumerate(MEM):
             cols[j % 3].button(e, on_click=mem_pick, args=(e,), use_container_width=True, key=f"mem_{len(S.mem_in)}_{j}")
